@@ -14,7 +14,7 @@ config();
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/moviesDB', {
+mongoose.connect(process.env.mongodb, {
   useNewUrlParser: true,
 });
 
