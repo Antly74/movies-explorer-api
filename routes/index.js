@@ -16,12 +16,13 @@ router.get('/crash-test', () => {
 router.post('/signin', validateSignIn, login);
 router.post('/signup', validateSignUp, createUser);
 
-router.post('/signout', auth, logout);
+router.use(auth);
+router.post('/signout', logout);
 
-router.use('/users', auth, userRouter);
-router.use('/movies', auth, movieRouter);
+router.use('/users', userRouter);
+router.use('/movies', movieRouter);
 
-router.all('*', auth, (req, res, next) => {
+router.all('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена!'));
 });
 
