@@ -20,8 +20,8 @@ module.exports.saveMovie = (req, res, next) => {
 
 module.exports.getMovies = (req, res, next) => {
   movieModel
-    .find({})
-    // .sort('-createdAt')
+    .find({ owner: req.user._id })
+    .sort('movieId')
     .then((movies) => res.send(movies))
     .catch(next);
 };
